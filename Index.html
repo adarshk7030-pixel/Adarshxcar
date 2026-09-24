@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adarsh Kumar | BMW World</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:white;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(12px);
+    z-index:1000;
+    border-bottom:1px solid #222;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:2px;
+    color:#fff;
+}
+
+.logo span{
+    color:#168cff;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:22px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#168cff;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.9)),
+    url("https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1800&q=80");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{
+    animation:heroIn 1.5s ease;
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(60px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.hero h1{
+    font-size:clamp(55px,10vw,110px);
+    letter-spacing:8px;
+    text-shadow:0 0 30px #168cff;
+}
+
+.hero h2{
+    font-size:30px;
+    margin-top:10px;
+}
+
+.hero p{
+    color:#bbb;
+    margin:18px 0 30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 30px;
+    background:#087cff;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(8,124,255,.5);
+}
+
+.btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 40px #087cff;
+}
+
+/* COLLECTION */
+section{
+    padding:100px 7%;
+}
+
+.title{
+    text-align:center;
+    font-size:45px;
+    margin-bottom:50px;
+}
+
+.cars{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#111;
+    border:1px solid #252525;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+    border-color:#168cff;
+    box-shadow:0 0 30px rgba(22,140,255,.25);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-info{
+    padding:25px;
+}
+
+.card h3{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#999;
+    margin-bottom:20px;
+}
+
+.spec-btn{
+    border:0;
+    background:#168cff;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.spec-btn:hover{
+    background:#0065c8;
+}
+
+/* SPECIFICATION POPUP */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(8px);
+    z-index:2000;
+    padding:30px;
+    overflow:auto;
+}
+
+.modal-box{
+    max-width:900px;
+    margin:60px auto;
+    background:#111;
+    border:1px solid #168cff;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 0 50px rgba(22,140,255,.25);
+    animation:popup .35s ease;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.close{
+    float:right;
+    font-size:30px;
+    cursor:pointer;
+    color:#aaa;
+}
+
+.close:hover{
+    color:white;
+}
+
+.modal h2{
+    font-size:38px;
+    margin-bottom:10px;
+    color:#168cff;
+}
+
+.modal-subtitle{
+    color:#999;
+    margin-bottom:30px;
+}
+
+.spec-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.spec{
+    background:#191919;
+    padding:18px;
+    border-radius:12px;
+    border:1px solid #292929;
+}
+
+.spec strong{
+    display:block;
+    color:#168cff;
+    margin-bottom:7px;
+}
+
+.spec span{
+    color:#ddd;
+}
+
+/* ABOUT */
+.about{
+    min-height:60vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:linear-gradient(135deg,#050505,#101a29);
+}
+
+.about-content{
+    max-width:750px;
+}
+
+.about h2{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.about p{
+    color:#aaa;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.creator{
+    margin-top:25px;
+    font-size:22px;
+    color:#168cff;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    background:#080808;
+    color:#777;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    nav{
+        padding:15px 20px;
+    }
+
+    nav a{
+        margin-left:8px;
+        font-size:12px;
+    }
+
+    section{
+        padding:75px 20px;
+    }
+
+    .title{
+        font-size:35px;
+    }
+
+    .modal{
+        padding:15px;
+    }
+
+    .modal-box{
+        padding:22px;
+        margin:35px auto;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+
+    <div class="logo">
+        <span>ADARSH</span> KUMAR
+    </div>
+
+    <div>
+        <a href="#home">Home</a>
+        <a href="#cars">BMW Cars</a>
+        <a href="#about">About</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>BMW</h1>
+
+        <h2>ADARSH KUMAR</h2>
+
+        <p>
+            Explore BMW Performance • Design • Technology
+        </p>
+
+        <a href="#cars" class="btn">
+            EXPLORE BMW ↓
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- BMW COLLECTION -->
+<section id="cars">
+
+    <h2 class="title">
+        BMW COLLECTION
+    </h2>
+
+    <div class="cars">
+
+        <!-- M4 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1617814076668-7e8c0e7b8f7b?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="card-info">
+
+                <h3>BMW M4</h3>
+
+                <p>
+                    High-performance sports coupe
+                </p>
+
+                <button class="spec-btn"
+                onclick="showSpecs('m4')">
+                    VIEW SPECIFICATIONS
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- M5 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="card-info">
+
+                <h3>BMW M5</h3>
+
+                <p>
+                    Luxury performance sedan
+                </p>
+
+                <button class="spec-btn"
+                onclick="showSpecs('m5')">
+                    VIEW SPECIFICATIONS
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- M8 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="card-info">
+
+                <h3>BMW M8</h3>
+
+                <p>
+                    Luxury performance coupe
+                </p>
+
+                <button class="spec-btn"
+                onclick="showSpecs('m8')">
+                    VIEW SPECIFICATIONS
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SPECIFICATION POPUP -->
+<div class="modal" id="specModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeSpecs()">×</span>
+
+        <h2 id="carName">
+            BMW
+        </h2>
+
+        <p class="modal-subtitle">
+            Detailed specifications
+        </p>
+
+        <div class="spec-grid" id="specGrid"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+
+    <div class="about-content">
+
+        <h2>BMW EXPERIENCE</h2>
+
+        <p>
+            Welcome to the BMW world created by Adarsh Kumar.
+            Explore performance, engineering, technology,
+            design and detailed vehicle specifications.
+        </p>
+
+        <div class="creator">
+            ✦ Created by Adarsh Kumar ✦
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    © 2026 Adarsh Kumar | BMW Fan Website
+</footer>
+
+
+<script>
+
+const cars = {
+
+    m4: {
+        name: "BMW M4",
+        specs: [
+            ["Engine","3.0L Twin-Turbo Inline-6"],
+            ["Power","High-performance petrol engine"],
+            ["Transmission","8-Speed Automatic"],
+            ["Drivetrain","Rear-Wheel Drive / AWD variants"],
+            ["Body Type","Sports Coupe"],
+            ["Suspension","Performance-tuned suspension"],
+            ["Brakes","High-performance disc brakes"],
+            ["Steering","Electric Power Steering"],
+            ["Wheels","Performance alloy wheels"],
+            ["Seats","4 / 5 depending on configuration"],
+            ["Infotainment","BMW iDrive"],
+            ["Safety","Multiple driver-assistance systems"],
+            ["Lighting","LED / Adaptive lighting"],
+            ["Drive Modes","Multiple selectable driving modes"]
+        ]
+    },
+
+    m5: {
+        name: "BMW M5",
+        specs: [
+            ["Engine","High-performance BMW M engine"],
+            ["Power","Performance-focused powertrain"],
+            ["Transmission","Automatic transmission"],
+            ["Drivetrain","All-Wheel Drive"],
+            ["Body Type","Performance Sedan"],
+            ["Suspension","Adaptive M suspension"],
+            ["Brakes","M Performance brakes"],
+            ["Steering","Variable sport steering"],
+            ["Wheels","M alloy wheels"],
+            ["Seats","5"],
+            ["Infotainment","BMW iDrive"],
+            ["Safety","Advanced driver-assistance systems"],
+            ["Lighting","LED / Adaptive lighting"],
+            ["Drive Modes","M selectable drive modes"]
+        ]
+    },
+
+    m8: {
+        name: "BMW M8",
+        specs: [
+            ["Engine","High-performance BMW M engine"],
+            ["Power","High-performance powertrain"],
+            ["Transmission","Automatic transmission"],
+            ["Drivetrain","BMW xDrive AWD"],
+            ["Body Type","Luxury Performance Coupe"],
+            ["Suspension","Adaptive M suspension"],
+            ["Brakes","High-performance M brakes"],
+            ["Steering","M Servotronic steering"],
+            ["Wheels","M Performance alloy wheels"],
+            ["Seats","4"],
+            ["Infotainment","BMW iDrive"],
+            ["Safety","Advanced safety technologies"],
+            ["Lighting","Adaptive LED lighting"],
+            ["Drive Modes","Configurable M modes"]
+        ]
+    }
+
+};
+
+
+function showSpecs(car){
+
+    const data = cars[car];
+
+    document.getElementById("carName").innerText =
+        data.name;
+
+    const grid =
+        document.getElementById("specGrid");
+
+    grid.innerHTML = "";
+
+    data.specs.forEach(item => {
+
+        grid.innerHTML += `
+            <div class="spec">
+                <strong>${item[0]}</strong>
+                <span>${item[1]}</span>
+            </div>
+        `;
+
+    });
+
+    document.getElementById("specModal").style.display =
+        "block";
+
+    document.body.style.overflow = "hidden";
+}
+
+
+function closeSpecs(){
+
+    document.getElementById("specModal").style.display =
+        "none";
+
+    document.body.style.overflow = "auto";
+}
+
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("specModal");
+
+    if(event.target === modal){
+
+        closeSpecs();
+
+    }
+
+}
+
+</script>
+
+</body>
+          </html>
